@@ -1,14 +1,15 @@
 package br.com.ft5.converter.controllers;
 
+import br.com.ft5.converter.dto.CurrencyDTO;
 import br.com.ft5.converter.services.CurrencyService;
 
 public class CurrencyController {
 	
 	private CurrencyService currencyService = new CurrencyService();
 
-	public Double convertController(String Currency, Double value) {
-		System.out.println(Currency + ": " + value);
-		return currencyService.CurrencyServiceByName(Currency, value);
+	public CurrencyDTO convertController(String code, Double value) {
+		System.out.println(code + ": " + value);	
+		return currencyService.CurrencyServiceByCode(code, value);
 
 	}
 
