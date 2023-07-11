@@ -3,7 +3,7 @@ package br.com.ft5.converter.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Moeda implements Serializable{
+public class Currency implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String root;
@@ -19,10 +19,10 @@ public class Moeda implements Serializable{
 	private String timestamp;
 	private String create_Data;
 	
-	public Moeda() {
+	public Currency() {
 	}
 
-	public Moeda(String root, String code, String codein, String name, 
+	public Currency(String root, String code, String codein, String name, 
 			String high, String low, String varBid,
 			String pctChange, String bid, String ask, 
 			String timestamp, String create_Data) {
@@ -149,7 +149,7 @@ public class Moeda implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Moeda other = (Moeda) obj;
+		Currency other = (Currency) obj;
 		return Objects.equals(root, other.root);
 	}
 
