@@ -1,6 +1,8 @@
 package br.com.ft5.converter.views;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
@@ -18,77 +20,62 @@ public class MainConverterView extends JFrame implements ActionListener {
 
 	private Dimension dimension = new Dimension(600, 400);
 	
-	private JPanel jpMain = new JPanel();
-	private JPanel jpNorth = new JPanel();
-	private JPanel jpCenter = new JPanel();
-	private JPanel jpSouth = new JPanel();
-	private JLabel jlMain = new JLabel("Alura - Oracle Next One FT5");
-	private JButton jbTemperature = new JButton("Temperatura");
-	private JButton jbCurrency = new JButton("Moeda");
-	private JButton jbContinue = new JButton("Continuar");
-	private JButton jbExit = new JButton("Sair");
+	// jpMain = cards
+	private CardLayout cardLayout = new CardLayout();
+	private Container jpMain = new JPanel();
+	
 	
 	public MainConverterView() throws HeadlessException {
-		this.setTitle("Conversor");
-		this.setMinimumSize(dimension);
-		this.setLayout(new BorderLayout());
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		super("Conversor");
+		setLayout(new BorderLayout());
+		setMinimumSize(dimension);
+		
+		jpMain.setLayout(new CardLayout());
+		jpMain.add("Main", new JPanelMainConverterView());
+		jpMain.add("Currency", new JPanelConverterCurrency());
+		jpMain.add("Temperature", new JPanelConverterTemperature());
+		cardLayout = (CardLayout) jpMain.getLayout();
+		cardLayout.show(jpMain, "Main");
+		
+		JPanel jpMainExit = new JPanel();
+		jpMainExit.setLayout(new FlowLayout());
+		JButton jbExit = new JButton("Sair");
+		jbExit.addActionListener(this);
+		jpMainExit.add(jbExit);
+		
+		getContentPane().add(MainTitle(), BorderLayout.NORTH);
+		getContentPane().add(jpMain, BorderLayout.CENTER);
+		getContentPane().add(jpMainExit, BorderLayout.SOUTH);
+		pack();
+		setVisible(true);
 	}
 	
-	public void createMainConverterView() {
-		jpMain.setBorder(BorderFactory.createEtchedBorder());
-		jpMain.add(jlMain);
-		
-		jpNorth.setLayout(new FlowLayout());
-		jbTemperature.addActionListener(this);
-		jbCurrency.addActionListener(this);
-		jpNorth.add(jbTemperature);
-		jpNorth.add(jbCurrency);
-		
-		FlowLayout fl = new FlowLayout();
-		fl.setAlignment(FlowLayout.RIGHT);
-		jbContinue.addActionListener(this);
-		jbExit.addActionListener(this);
-		jpSouth.setLayout(fl);
-		jpSouth.add(jbContinue);
-		jbContinue.setEnabled(false);
-		jpSouth.add(jbExit);
-		
-		jpSouth.setBorder(BorderFactory.createEtchedBorder());
+	private JPanel MainTitle() {
+		JPanel jpPanelLabelTitle = new JPanel();
+		jpPanelLabelTitle.setLayout(new FlowLayout());
+		jpPanelLabelTitle.setBorder(BorderFactory.createEtchedBorder());		
+		JLabel jlMainTitle = new JLabel("Alura - Oracle Next One FT5");
 
-
-		this.add(jpMain, BorderLayout.NORTH);
-		this.add(jpNorth, BorderLayout.CENTER);
-		this.add(jpSouth, BorderLayout.SOUTH);
-		this.pack();
-		this.setVisible(true);
+		jpPanelLabelTitle.add(jlMainTitle);
+		return jpPanelLabelTitle;
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		System.out.println(ae.getActionCommand());
-		String choice = ae.getActionCommand().toString();
-		if(choice.equals("Sair")) {
-			System.exit(0);			
+		String option = ae.getActionCommand().toString();
+		if(option.equals("Sair")) {
+			System.exit(0);
 		}
-		if(choice.equals("Continuar")) {
-			jbTemperature.setVisible(true);
-			jbCurrency.setVisible(true);
-			jbContinue.setEnabled(false);
+		if(option.equals("Temperatura")) {
+			cardLayout.show(jpMain, "Temperature");
+			System.out.println("Temperatura");
 		}
-		if(choice.equals("Moeda")) {
-			jbContinue.setEnabled(true);
-			jbTemperature.setVisible(false);
-			jbCurrency.setVisible(false);
-		}
-		if(choice.equals("Temperatura")) {
-			jbContinue.setEnabled(true);
-			jbTemperature.setVisible(false);
-			jbCurrency.setVisible(false);
+		if(option.equals("Moeda")) {
+			cardLayout.show(jpMain, "Currency");
+			System.out.println("Moeda");
 		}
 		
 	}
-	
-	
 
 }
