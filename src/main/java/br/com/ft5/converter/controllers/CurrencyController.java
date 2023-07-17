@@ -7,10 +7,8 @@ public class CurrencyController {
 	
 	private CurrencyService currencyService = new CurrencyService();
 
-	public CurrencyDTO convertController(String code, Double value) {
-		System.out.println(code + ": " + value);	
+	public CurrencyDTO convertController(String code, Double value) {	
 		return currencyService.CurrencyServiceByCode(code, value);
-
 	}
 
 }

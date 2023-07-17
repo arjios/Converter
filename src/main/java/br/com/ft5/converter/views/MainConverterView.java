@@ -37,7 +37,7 @@ public class MainConverterView extends JFrame implements ActionListener {
 	// --- North
 	private JPanel jpanelTitle = new JPanel();
 	private FlowLayout flowLayoutTitle = new FlowLayout();
-	private JLabel jlabelTitle = new JLabel("Alura - Oracle Next One");
+	private JLabel jlabelTitle = new JLabel("Alura - Oracle Next One FT5");
 	
 	// --- Center
 	private JPanel jpCenter = new JPanel();

@@ -166,7 +166,6 @@ public class JPanelConverterCurrency extends JPanel implements KeyListener {
 	public void keyTyped(KeyEvent ke) {
 		char ch = ke.getKeyChar();
 		if( ch == '\n') {
-			System.out.println("GET TEXT: " + jtextInputCurrency.getText());
     		CurrencyController currencyController = new CurrencyController();
     		CurrencyDTO dto = currencyController.convertController(jcomboChoiceCurrency.getSelectedItem().toString(), Double.parseDouble(jtextInputCurrency.getText().replace(",", "")));
     		jlabelValueCurrency.setText((dto.getName().toString().replace("/", " para ")) + "=> " + NumberFormat.getNumberInstance().format(dto.getValue()));
@@ -175,13 +174,10 @@ public class JPanelConverterCurrency extends JPanel implements KeyListener {
 			ke.consume();
 			if(!valueString.equals("0.00") || ch != '0') {
 				if(valueString.equals("0.00")) {
-					System.out.println("*******************************************");
-					System.out.println(valueString + " : " + ch);
 					valueString = String.valueOf(ch);
 					valueDouble = (Double.parseDouble(valueString)*0.01);
 					Double textoDouble =((Double.parseDouble(jtextInputCurrency.getText()))) + valueDouble;
 					jtextInputCurrency.setText(String.valueOf(textoDouble));
-					System.out.println(String.valueOf(textoDouble));
 				} else {
 					valueString = String.valueOf(ch);
 					valueDouble = (Double.parseDouble(valueString)*0.01);
