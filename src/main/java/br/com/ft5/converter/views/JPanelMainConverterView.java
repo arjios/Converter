@@ -2,46 +2,63 @@ package br.com.ft5.converter.views;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class JPanelMainConverterView extends JPanel implements ActionListener {
+public class JPanelMainConverterView extends JPanel{
 	private static final long serialVersionUID = 1L;
+	
+	// --- North
+	private JPanel jpanelChoice = new JPanel();
+	private FlowLayout flowLayoutChoice = new FlowLayout();
+	private JButton jbuttonTemperature = new JButton("Temperatura");
+	private JButton jbuttonCurrency = new JButton("Moeda");
 
 	public JPanelMainConverterView() {
-		JPanel jpanelMainConverterView = new JPanel(); //variável de instancia
-		jpanelMainConverterView.setLayout(new BorderLayout());
-		
-		JPanel jpMainButtons = new JPanel();
-		jpMainButtons.setLayout(new FlowLayout());
-		JButton jbTemperature = new JButton("Temperatura");
-		jbTemperature.addActionListener(this);
-		JButton jbCurrency = new JButton("Moeda");
-		jbCurrency.addActionListener(this);
-		jpMainButtons.add(jbTemperature);
-		jpMainButtons.add(jbCurrency);
+		setLayout(new BorderLayout());
 
-		jpanelMainConverterView.add(jpMainButtons, BorderLayout.CENTER);		
-		this.add(jpanelMainConverterView);
+		// --- North
+		setJpanelChoice(jpanelChoice);
+		add(getJpanelChoice());
 		
+		setVisible(true);
+	}
+	
+	public void setJpanelChoice(JPanel jpanelChoice) {
+		flowLayoutChoice.setAlignment(FlowLayout.CENTER);
+		jpanelChoice.setLayout(flowLayoutChoice);
+		jpanelChoice.add(jbuttonTemperature);
+		jbuttonCurrency.setPreferredSize(jbuttonTemperature.getPreferredSize());
+		jpanelChoice.add(jbuttonCurrency);
+	}
+	
+	public JPanel getJpanelChoice() {
+		return jpanelChoice;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent ae) {
-		String action = ae.getActionCommand().toString();
-		if(action.equals("Sair")) {
-			System.exit(0);
-		}
-		if(action.equals("Temperatura")) {
-			System.out.println("Temperatura");
-		}
-		if(action.equals("Moeda")) {
-			System.out.println("Moeda");
-		}
+	public FlowLayout getFlowLayoutChoice() {
+		return flowLayoutChoice;
+	}
 
+	public void setFlowLayoutChoice(FlowLayout flowLayoutChoice) {
+		this.flowLayoutChoice = flowLayoutChoice;
+	}
+
+	public JButton getJbuttonTemperature() {
+		return jbuttonTemperature;
+	}
+
+	public void setJbuttonTemperature(JButton jbuttonTemperature) {
+		this.jbuttonTemperature = jbuttonTemperature;
+	}
+
+	public JButton getJbuttonCurrency() {
+		return jbuttonCurrency;
+	}
+
+	public void setJbuttonCurrency(JButton jbuttonCurrency) {
+		this.jbuttonCurrency = jbuttonCurrency;
 	}
 
 }
