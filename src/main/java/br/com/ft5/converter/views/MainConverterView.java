@@ -30,6 +30,7 @@ public class MainConverterView extends JFrame implements ActionListener {
 	private Dimension dimension = new Dimension(600, 200);
 	
 	JPanelConverterCurrency jpanelConverterCurrency = new JPanelConverterCurrency();
+	JPanelConverterTemperature jpanelConverterTemperature = new JPanelConverterTemperature();
 
 	private JPanel jpanelCards;
 	private JPanel jpMain = new JPanel();
@@ -82,17 +83,11 @@ public class MainConverterView extends JFrame implements ActionListener {
 		jpanelCenterButtons.add(jbuttonExit);
 		jpMain.add(jpanelCenterButtons);
 		
-		// --- Temperature Converter
-		JPanelConverterTemperature jpanelConverterTemperature = new JPanelConverterTemperature();
-//		JPanelConverterCurrency jpanelConverterCurrency = new JPanelConverterCurrency();
-		
 		jpanelCards = new JPanel(new CardLayout());
 		jpanelCards.add(jpCenter, RETORNAR);
 		jpanelCards.add(jpanelConverterTemperature, TEMPERATURE);
 		jpanelCards.add(jpanelConverterCurrency, CURRENCY);
-		
-
-		
+			
 		jpMain.setLayout(new BorderLayout());
 		jpMain.add(jpanelTitle, BorderLayout.NORTH);
 		jpMain.add(jpanelCenterButtons, BorderLayout.SOUTH);
